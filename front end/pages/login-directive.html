@@ -1,0 +1,23 @@
+<style>
+	.ng-valid.ng-dirty{
+		border-color: green;
+	}
+	.ng-invalid.ng-dirty{
+		border-color: red;
+	}
+	
+</style>
+
+<div align="center" class="loginbox" ng-controller="loginController" ng-hide="loginLoaded">
+			<h3>Login</h3>
+			<form name="loginForm" ng-submit="loginForm.$valid && sendLogin()" novalidate>
+				<input type="email" style="width:70%" placeholder="email id" ng-model="email_id" required><br>
+				<input type="password" style="width:70%" placeholder="password" ng-model="password" ng-Minlength="6" required><br>
+				<input type="submit" style="width:70%" value="Login"><br>
+			</form>
+			<h4 ng-show="!loginForm.$valid">Form is not valid</h4>
+			<h4 ng-show="loginCounter==2&&!loginLoaded">Invalid email or password</h4>
+			<a href ng-click="setDiv(2)">Don't have an account? Register</a>
+			<h5>Try with</h5>
+			<h5>User Name: demouser@gmail.com <br>Password :123456</h5>
+</div>

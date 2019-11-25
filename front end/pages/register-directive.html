@@ -1,0 +1,24 @@
+<style>
+	.ng-valid.ng-dirty{
+		border-color: green;
+	}
+	.ng-invalid.ng-dirty{
+		border-color: red;
+	}
+</style>
+
+<div class="registerbox" align="center" ng-controller="registerController" ng-hide="regLoaded">
+			<h3>Register</h3>
+			<form name="regForm" ng-submit="regForm.$valid && register()" novalidate>
+				<input style="width:70%" type="text" placeholder="Name" ng-model="name" ng-Minlength="6" required><br>
+	           	<input style="width:70%" type="email" placeholder="email id" ng-model="email_id" required><br>
+	           	<input style="width:70%" type="password" placeholder="password" ng-model="password" ng-Minlength="6" required><br>
+	           	<input style="width:70%" type="number" placeholder="phone" ng-model="phone" ng-Minlength="10" ng-Maxlength="10" required><br>
+	           	<input type="radio" name="sameradio" ng-model="value" value="male" required>Male
+	           	<input type="radio" name="sameradio" ng-model="value" value="female" required>Female<br>
+	           	<input style="width:70%" type="submit" value="Register"><br>
+			</form>
+			<h4 ng-show="!regForm.$valid">Form is not Valid</h4>
+			<h4 ng-show="!regLoaded&&regCounter==2">Registration Failed</h4>
+			<a href ng-click="setDiv(1)">Already have an account? Login</a>
+</div>

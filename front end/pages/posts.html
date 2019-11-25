@@ -1,0 +1,67 @@
+<style>
+	div.posts{
+				padding:2px;
+				background-color:#EFEFEF;
+				box-shadow: 0px 0px 20px 0px #888888;
+				width:35%;
+				margin:15px auto;
+				cursor: pointer;
+	}
+	.angular-google-map {
+			display: block;
+		}
+</style>
+<div>
+<div>
+	<h4 align="center">Filtering</h4>
+	<input type="text" placeholder="Search/Filter" ng-model="search">
+	
+</div>
+
+<div ng-repeat="p in posts | filter:search" class="posts" ng-init="viewMore=false; viewMap=false; createEvent=false;">
+	<h2>{{p.title}}</h2>
+	<h5>At {{p.address}}</h5>
+	<img style="width: 99%" ng-src="{{p.image}}">
+	<h4><a href style="padding:5px" ng-click="viewMore=!viewMore">{{viewMore ? 'View Less': 'View More'}}</a></h4>
+	<div ng-show="viewMore">
+		
+		<h4>Description :{{p.description}}</h4>
+		<h4>Post by: {{p.name}}</h4>
+		
+		<h4><a href style="padding:5px" ng-click="viewMap=!viewMap">{{viewMap ? 'Hide Map' : 'View on Map'}}</a></h4>
+		<div ng-show="viewMap">
+			<google-map
+				center="{lat:p.latitude,lng:p.longitude}"
+				zoom="12" 
+				markers="[{latitude:p.latitude, longitude:p.longitude}]"
+				draggable="true"
+				style="height: 200px; width: 99%">
+			</google-map>
+		</div>
+		
+		<div ng-show="p.event_created=='yes'">
+			<h4>Event Name :{{p.event_name}}</h4>
+			<h4>Event Date :{{p.event_date}}</h4>
+			<h4>Event Budget:{{p.event_budget}}</h4>
+			<h4>Create by:{{p.event_created_by}}</h4>
+			
+			<input type="button" ng-hide="jsonData[0].email==p.event_created_by" value="Join Event"
+			ng-click="joinEventFunction(p.event_name, p.event_created_by, jsonData[0].name, jsonData[0].phone, jsonData[0].email)">
+			<h4 ng-show="userJoined">You have Joined in the Event</h4>
+		</div>
+		
+		<div ng-show="p.event_created=='no'">
+			<h4>Event is Not Created</h4>
+			<h4><a href ng-click="createEvent = !createEvent">{{createEvent ? 'Cancel Event' : 'Create Event'}}</a></h4>
+			<div ng-show="createEvent">
+				<input type="text" ng-model="e.event_name" placeholder="Event Name"><br>
+				<input type="text" ng-model="e.event_date" placeholder="dd-mm-yyyy"><br>
+				<input type="text" ng-model="e.event_budget" placeholder="Budget in rupees"><br>
+				<input type="submit" value="Create Event" ng-click="createEventFunction(e.event_name, e.event_date, e.event_budget, jsonData[0].name, jsonData[0].email, p.title)">
+				<h4 ng-if="eventCreated">Event Created</h4>
+			</div>
+		</div>
+		
+	</div>
+</div>
+</div>

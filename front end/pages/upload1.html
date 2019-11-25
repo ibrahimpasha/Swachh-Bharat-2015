@@ -1,0 +1,22 @@
+<div ng-controller="uploadController">
+	<form name="uploadForm" ng-init="showImage=false; uploadSuccess=false;" novalidate ng-submit="uploadForm.$valid&& uploadDesc(u.title, u.description, u.latitude,
+		 u.longitude, u.members, u.budget)">
+		<input type="text" placeholder="Title" ng-model="u.title" ng-Minlength="6" required><br>
+		<input type="text" placeholder="Description" ng-model="u.description" ng-Minlength="10" required><br>
+		<input type="text" placeholder="Latitude" ng-model="u.latitude" required><br>
+		<input type="text" placeholder="Longitude" ng-model="u.longitude" required><br>
+		<input type="text" placeholder="members" ng-model="u.members" required><br>
+		<input type="text" placeholder="budget" ng-model="u.budget"><br>
+		<input type="submit" value="Choose image" ng-click="showImage=!showImage">
+	</form>
+	
+		 <div ng-show="showImage">
+		 	<form action="http://ibbu.byethost7.com/swachbharath/uploadFromWeb.php" method="post" enctype="multipart/form-data" target="_blank">
+		 		<input type="file" name="fileToUpload" id="fileToUpload">
+		 		<input type="hidden" name="phone" id="phone" value="{{scopephone}}">
+		 		<input type="hidden" name="counter" id="counter" value="{{scopecounter}}">
+		 		<input type="submit" value="Post" name="submit" id="submit" ng-click="uploadSuccess=true;">
+		 	</form>
+		 </div>
+		 <div ng-show="uploadSuccess"><h4>Posting Success</h4></div>
+</div>

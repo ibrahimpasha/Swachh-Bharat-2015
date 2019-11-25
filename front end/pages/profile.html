@@ -1,0 +1,16 @@
+<div ng-controller="profileController">
+	<div ng-init="cpass=false">
+	<h4>Name :{{jsonData[0].name}}</h4>
+	<h4>Email :{{jsonData[0].email}}</h4>
+	<h4><a href ng-click="cpass=!cpass">Change Password</a></h4>
+	</div>
+	<div ng-show="cpass">
+	<form name="changeForm" ng-submit="changeForm.$valid && changePassword()" novalidate>
+		<input type="password" style="width:20%" placeholder="Enter old password" ng-model="old_password" ng-Minlength="6" required><br>
+		<input type="password" style="width:20%" placeholder="Enter new password" ng-model="new_password" ng-Minlength="6" required><br>
+		<input type="submit" style="width:20%" value="Change Password">
+		<h4 ng-if="pchanged">Password Changed Successfully</h4>
+	</form>
+	
+	</div>
+</div>
